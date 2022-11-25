@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Project1</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Genesys Chat Demo v2.0</h1>
+        <p1>Black Box Org ID 4161</p1>
+<div id="chat">
+  <script src="https://apps.usw2.pure.cloud/widgets/9.0/cxbus.min.js" 
+  onload="javascript:CXBus.configure({debug:false,pluginsPath:'https://apps.usw2.pure.cloud/widgets/9.0/plugins/'}); 
+  CXBus.loadPlugin('widgets-core');"></script>
+
+<script>
+  window._genesys = {
+    "widgets": {
+      "webchat": {
+        "transport": {
+          "type": "purecloud-v2-sockets",
+          "dataURL": "https://api.usw2.pure.cloud",
+          "deploymentKey": "e3eecd47-2790-4c10-8c39-29314e9dc200",
+          "orgGuid": "f071a501-0987-41eb-b509-0f6097c504c9",
+          "interactionData": {
+            "routing": {
+              "targetType": "QUEUE",
+              "targetAddress": "Projects",
+              "priority": 2
+            }
+          }
+        },
+        "userData": {
+          "addressStreet": "",
+          "addressCity": "",
+          "addressPostalCode": "",
+          "addressState": "",
+          "phoneNumber": "",
+          "customField1Label": "",
+          "customField1": "",
+          "customField2Label": "",
+          "customField2": "",
+          "customField3Label": "",
+          "customField3": ""
+        }
+      }
+    }
+  };
+
+  function getAdvancedConfig() {
+    return {
+      "form": {
+        "autoSubmit": false,
+        "firstname": "",
+        "lastname": "",
+        "email": "",
+        "subject": ""
+      },
+      "formJSON": {
+        "wrapper": "<table></table>",
+        "inputs": [
+          {
+            "id": "cx_webchat_form_firstname",
+            "name": "firstname",
+            "maxlength": "100",
+            "placeholder": "Required",
+            "label": "First Name"
+          },
+          {
+            "id": "cx_webchat_form_lastname",
+            "name": "lastname",
+            "maxlength": "100",
+            "placeholder": "Required",
+            "label": "Last Name"
+          },
+          {
+            "id": "cx_webchat_form_email",
+            "name": "email",
+            "maxlength": "100",
+            "placeholder": "Optional",
+            "label": "Email"
+          },
+          {
+            "id": "cx_webchat_form_subject",
+            "name": "subject",
+            "maxlength": "100",
+            "placeholder": "Optional",
+            "label": "Subject"
+          }
+        ]
+      }
+    };
+  }
+
+  const customPlugin = CXBus.registerPlugin('Custom');
+</script>
+
+<button type="button" id="chat-button" onclick="customPlugin.command('WebChat.open', getAdvancedConfig());">Start Chat</button>
+</div>
+    </body>
+</html>
